@@ -37,6 +37,3 @@ curl --location 'localhost:8000/api/chat/request' \
 --data '{ "messages": [{ "role": "user", "content": "Hello" }] }'
 ```
 
-```
-ENVIRONMENT=prod python main.py
-```

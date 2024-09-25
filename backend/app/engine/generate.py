@@ -7,9 +7,7 @@ import os
 
 from app.engine.loaders import get_documents
 from app.settings import init_settings
-from llama_index.core.indices import (
-    VectorStoreIndex,
-)
+from llama_index.core.indices import VectorStoreIndex
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
