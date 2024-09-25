@@ -1,0 +1,30 @@
+# macOS
+*.DS_Store
+
+# Distribution / packaging
+.Python
+*.pyc
+wheels/
+*.egg-info/
+*.egg
+
+# Data
+backend/data/*
+backend/storage/*
+*.pdf
+*.csv
+
+
+# Jupyter Notebook
+*.ipynb
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
