@@ -29,7 +29,15 @@ The example provides the API endpoint:
 
 `/api/chat/request` - a non-streaming chat endpoint
 
-You can use it via, e.g.:
+You can use it via its streaming endpoint:
+
+```
+curl --location 'localhost:8000/api/chat/' \
+--header 'Content-Type: application/json' \
+--data '{ "messages": [{ "role": "user", "content": "Hello" }] }'
+```
+
+or its non-streaming counterpart:
 
 ```
 curl --location 'localhost:8000/api/chat/request' \
@@ -37,9 +45,19 @@ curl --location 'localhost:8000/api/chat/request' \
 --data '{ "messages": [{ "role": "user", "content": "Hello" }] }'
 ```
 
+### CLI
+
+For a simple CLI assistant run
+
+```
+poetry run chat-cli
+```
+
+after having started the server.
+
 ## RoadMap 🗺️
 
 1. Streaming output ✅
-2. CLI
+2. CLI ✅
 3. VectorDB (e.g. Weaviate)
 4. React Frontend
