@@ -13,20 +13,21 @@ poetry shell
 
 Put your data sources in the `backend/data` folder
 
-Second, generate the embeddings of the documents in the `./data` directory:
+Generate the embeddings of the documents in the `./data` directory:
 
 ```
 poetry run generate
 ```
 
-Third, run the development server:
+Run the development server:
 
 ```
 python main.py
 ```
 
-The example provides the API endpoint:
+There are two API endpoint:
 
+`/api/chat/` - a streaming chat endpoint
 `/api/chat/request` - a non-streaming chat endpoint
 
 You can use it via its streaming endpoint:

@@ -10,7 +10,9 @@ wheels/
 
 # Data
 backend/data/*
+!backend/data/.gitignore
 backend/storage/*
+!backend/storage/.gitignore
 *.pdf
 *.csv
 
