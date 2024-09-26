@@ -1,6 +1,6 @@
 ## Getting Started
 
-This is based upon the bootstrapped version of [LlamaIndex](https://www.llamaindex.ai/) using [FastAPI](https://fastapi.tiangolo.com/) with a locally run LLM via Ollama.
+This is based upon the bootstrapped version (via `create-llama`) of [LlamaIndex](https://www.llamaindex.ai/) using [FastAPI](https://fastapi.tiangolo.com/) with a locally run LLM via Ollama.
 
 First , go to `backend` and create an `.env` file with your environment variables, a sample setup can be found in `backend/.env-sample`.
 
@@ -37,3 +37,9 @@ curl --location 'localhost:8000/api/chat/request' \
 --data '{ "messages": [{ "role": "user", "content": "Hello" }] }'
 ```
 
+## RoadMap 🗺️
+
+1. Streaming output ✅
+2. CLI
+3. VectorDB (e.g. Weaviate)
+4. React Frontend

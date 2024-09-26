@@ -13,6 +13,13 @@ logger = logging.getLogger("uvicorn")
 
 
 class FileContent(BaseModel):
+    """
+    Represents the content of a file.
+
+    Attributes:
+      type (Literal["text", "ref"]): The type of the file content. It can be either "text" or "ref".
+      value (str | List[str]): The value of the file content. If the file is pure text, it is a string. Otherwise, it is a list of document IDs.
+    """
     type: Literal["text", "ref"]
     # If the file is pure text then the value is be a string
     # otherwise, it's a list of document IDs
@@ -20,6 +27,16 @@ class FileContent(BaseModel):
 
 
 class File(BaseModel):
+    """
+    Represents a file.
+
+    Attributes:
+      id (str): The ID of the file.
+      content (FileContent): The content of the file.
+      filename (str): The name of the file.
+      filesize (int): The size of the file in bytes.
+      filetype (str): The type of the file.
+    """
     id: str
     content: FileContent
     filename: str
@@ -28,6 +45,23 @@ class File(BaseModel):
 
 
 class AnnotationFileData(BaseModel):
+    """
+    Model representing annotation file data.
+
+    Attributes:
+      files (List[File]): List of files.
+
+    Config:
+      json_schema_extra (dict): Extra JSON schema for the model.
+        example (dict): Example data for the model.
+          csvFiles (list): List of CSV files.
+            content (str): Content of the file.
+            filename (str): Name of the file.
+            filesize (int): Size of the file.
+            id (str): ID of the file.
+            type (str): Type of the file.
+      alias_generator (callable): Alias generator function.
+    """
     files: List[File] = Field(
         default=[],
         description="List of files",
@@ -51,10 +85,30 @@ class AnnotationFileData(BaseModel):
 
 
 class Annotation(BaseModel):
+    """
+    Represents an annotation.
+
+    Attributes:
+      type (str): The type of the annotation.
+      data (AnnotationFileData | List[str]): The data associated with the annotation.
+
+    Methods:
+      to_content() -> str | None:
+        Converts the annotation to content.
+
+        Returns:
+          str | None: The generated content if successful, None otherwise.
+    """
     type: str
     data: AnnotationFileData | List[str]
 
     def to_content(self) -> str | None:
+        """
+        Generates context content based on the type of annotation.
+
+        Returns:
+          str | None: The generated context content or None if the annotation type is not supported.
+        """
         if self.type == "document_file":
             # We only support generating context content for CSV files for now
             csv_files = [file for file in self.data.files if file.filetype == "csv"]
@@ -71,6 +125,14 @@ class Annotation(BaseModel):
 
 
 class Message(BaseModel):
+    """
+    Message class represents a message with role, content, and optional annotations.
+
+    Attributes:
+      role (MessageRole): The role of the message.
+      content (str): The content of the message.
+      annotations (List[Annotation], optional): The list of annotations associated with the message, if any.
+    """
     role: MessageRole
     content: str
     annotations: List[Annotation] | None = None
@@ -81,6 +143,14 @@ class ChatData(BaseModel):
     data: Any = None
 
     class Config:
+        """
+        Configuration class for the ChatData.
+
+        Attributes:
+          json_schema_extra (dict): Extra JSON schema for the model.
+
+        Example:
+        """
         json_schema_extra = {
             "example": {
                 "messages": [
